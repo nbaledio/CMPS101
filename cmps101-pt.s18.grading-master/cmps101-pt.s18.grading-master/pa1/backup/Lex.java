@@ -63,7 +63,11 @@ class Lex{
 	  //Prints lexicographic sorting of input file to the outputfile
 	  list.moveFront();
 	  while(list.cursor != null){
-		  out.println(array[list.get()]);
+		  if(list.cursor == list.back){
+			  out.print(array[list.get()]);
+		  }else{
+			  out.println(array[list.get()]);
+		  }
 		  list.moveNext();
 	  }
 	  

@@ -1,0 +1,25 @@
+Nathan Baledio
+ID: 1574354
+CMPS101 Spring 2019
+-------------------
+
+Files:
+1. List.java
+  -Java file that contains the List ADT. It is implemented as a
+   doubly linked list and has built in functions for adding, 
+   removing, moving its cursor, and returning values.
+
+2. ListClient.java
+  -Provided file to help with testing List.java
+
+3. Lex.java
+  -Main java file. Takes an input file and sorts it lexicographically.
+   Then, prints the result to the given output file.
+
+4. Makefile
+  -Used to create Lex. Simply run "make" to use.
+
+5. README
+  -This file
+
+Usage: java Lex <input file> <output file>

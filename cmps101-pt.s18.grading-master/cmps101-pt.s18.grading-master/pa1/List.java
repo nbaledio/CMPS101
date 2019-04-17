@@ -80,6 +80,7 @@ public class List{
 		back.next = null;
 		back.prev = front;
 		size = 0;
+                cursor = null;
   }
   void moveFront(){ 	// If List is non-empty, places the cursor under the front element,
 	   if(size != 0){	// otherwise does nothing.
