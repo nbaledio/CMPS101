@@ -6,18 +6,7 @@
 #ifndef List_H_INCLUDE_
 #define List_H_INCLUDE_
 
-#include<stdio.h>
-
-typedef struct List{
-	Node *front;
-	Node *back;
-}List;
-
-typedef struct Node{
-	int number;
-	struct Node *next;
-	struct Node *prev;
-}Node;
+typedef struct ListObj* List;
 
 // Constructors-Destructors ---------------------------------------------------
 List newList(void);
@@ -46,6 +35,7 @@ void deleteBack(List L);
 void delete(List L);
 
 // Other operations -----------------------------------------------------------
-void printList(FILE* out,
+void printList(FILE* out, List L);
+List copyList(List L);
 
 #endif
