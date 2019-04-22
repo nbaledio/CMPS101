@@ -37,5 +37,8 @@ void delete(List L);
 // Other operations -----------------------------------------------------------
 void printList(FILE* out, List L);
 List copyList(List L);
+int isFront(List L);
+int isBack(List L);
+
 
 #endif

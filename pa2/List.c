@@ -27,7 +27,8 @@ List newList(void){
    return newlist;
 }
 void freeList(List* pL){
-   
+   clear(*pL);
+   free(*pL); 
 }
 
 // Access functions -----------------------------------------------------------
@@ -38,7 +39,13 @@ int index(List L){
    if(L->cursor == NULL){
       return -1;
    }else{
-      return L->cursor->number;
+      int index = 0;
+      Node iter = L->front;
+      while(iter != L->cursor){
+         index++;
+         iter = iter->next;
+      }
+      return index;
    }
 }
 int front(List L){
@@ -76,12 +83,11 @@ void clear(List L){
       L->cursor = NULL;
       L->size = 0;
    }else{
-      Node iter = L->front;
-      while(iter != NULL){
-         Node deleted = iter;
-         iter = iter->next;
-         free(deleted);
-         L->size--;
+      //For some reason, looping deleteFront gives no errors 
+      //vs. iterating and freeing
+      int size = L->size;
+      for(int i = 0; i < size; i++){
+         deleteFront(L);
       }
       L->cursor = NULL;
    }
@@ -98,7 +104,7 @@ void moveBack(List L){
 }
 void movePrev(List L){
    if(L->cursor != NULL){
-      L->cursor = L->cursor->next;
+      L->cursor = L->cursor->prev;
    }
 }
 void moveNext(List L){
@@ -179,9 +185,6 @@ void insertAfter(List L, int data){
       
 }
 void deleteFront(List L){
-   if(L->cursor == L->front){
-      L->cursor = NULL;
-   }
    if(L->size == 1){
       free(L->front);
       L->front = NULL;
@@ -195,9 +198,6 @@ void deleteFront(List L){
    }
 }
 void deleteBack(List L){
-   if(L->cursor == L->back){
-      L->cursor = NULL;
-   }
    if(L->size == 1){
       free(L->back);
       L->front = NULL;
@@ -228,5 +228,40 @@ void delete(List L){
 }
 
 // Other operations -----------------------------------------------------------
-void printList(FILE* out, List L){}
-List copyList(List L);
+void printList(FILE* out, List L){
+   Node iter = L->front;
+   for(int i = 0; i < L->size; i++){
+      fprintf(out,"%d", iter->number);
+      iter = iter->next;
+      if(i + 1 != L->size){
+         fprintf(out,"%s"," ");
+      }
+   }
+}
+List copyList(List L){
+   List copy = newList();
+   Node iter = L->front;
+   if(L->size == 1){
+      copy->front = L->front;
+      copy->back = L->back;
+      copy->size++;
+   }else{
+      for(int i = 0; i < L->size; i++){
+         append(copy, iter->number);
+         iter = iter->next;
+      }
+   }
+   return copy;
+}
+int isFront(List L){
+   if(L->cursor == L->front){
+      return 1;
+   }
+   return 0;
+}
+int isBack(List L){
+   if(L->cursor == L->back){
+      return 1;
+   }
+   return 0;
+}
