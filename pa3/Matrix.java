@@ -139,30 +139,30 @@ public class Matrix{
 			addition = scalarMult(2.0);
 			return addition;
 		}
-		for(int i = 0; i < size; i++){
-			matrix[i].moveFront();
-			M.matrix[i].moveFront();
-			while(matrix[i].index() != -1 && M.matrix[i].index() != -1){
-				matrix_entry current = (matrix_entry)matrix[i].get();
-				matrix_entry current2 = (matrix_entry)M.matrix[i].get();
+		for(int i = 1; i <= size; i++){
+			matrix[i-1].moveFront();
+			M.matrix[i-1].moveFront();
+			while(matrix[i-1].index() != -1 && M.matrix[i-1].index() != -1){
+				matrix_entry current = (matrix_entry)matrix[i-1].get();
+				matrix_entry current2 = (matrix_entry)M.matrix[i-1].get();
 				if(current.column > current2.column){
-					addition.changeEntry(i+1,current2.column,current2.value);
-					M.matrix[i].moveNext();
+					addition.changeEntry(i,current2.column,current2.value);
+					M.matrix[i-1].moveNext();
 				}else if(current.column < current2.column){
-					addition.changeEntry(i+1,current.column,current.value);
-					matrix[i].moveNext();
+					addition.changeEntry(i,current.column,current.value);
+					matrix[i-1].moveNext();
 				}else if(current.column == current2.column){
 					if(current.value + current2.value != 0){
-						addition.changeEntry(i+1,current.column,current.value + current2.value);
+						addition.changeEntry(i,current.column,current.value + current2.value);
 					}
-					matrix[i].moveNext();
-					M.matrix[i].moveNext();	
+					matrix[i-1].moveNext();
+					M.matrix[i-1].moveNext();	
 				}
 			}
-			if(matrix[i].index() == -1){
-				add_fill(addition,M.matrix[i],i);
+			if(matrix[i-1].index() == -1){
+				add_fill(addition,M.matrix[i-1],i);
 			}else{
-				add_fill(addition,matrix[i],i);
+				add_fill(addition,matrix[i-1],i);
 			}
 		}
 		return addition;
@@ -183,30 +183,30 @@ public class Matrix{
 			subtraction = scalarMult(0);
 			return subtraction;
 		}
-		for(int i = 0; i < size; i++){
-			matrix[i].moveFront();
-			M.matrix[i].moveFront();
-			while(matrix[i].index() != -1 && M.matrix[i].index() != -1){
-				matrix_entry current = (matrix_entry)matrix[i].get();
-				matrix_entry current2 = (matrix_entry)M.matrix[i].get();
+		for(int i = 1; i <= size; i++){
+			matrix[i-1].moveFront();
+			M.matrix[i-1].moveFront();
+			while(matrix[i-1].index() != -1 && M.matrix[i-1].index() != -1){
+				matrix_entry current = (matrix_entry)matrix[i-1].get();
+				matrix_entry current2 = (matrix_entry)M.matrix[i-1].get();
 				if(current.column > current2.column){
-					subtraction.changeEntry(i+1,current2.column,-current2.value);
-					M.matrix[i].moveNext();
+					subtraction.changeEntry(i,current2.column,-current2.value);
+					M.matrix[i-1].moveNext();
 				}else if(current.column < current2.column){
-					subtraction.changeEntry(i+1,current.column,current.value);
-					matrix[i].moveNext();
+					subtraction.changeEntry(i,current.column,current.value);
+					matrix[i-1].moveNext();
 				}else if(current.column == current2.column){
 					if(current.value - current2.value != 0){
-						subtraction.changeEntry(i+1,current.column,current.value - current2.value);
+						subtraction.changeEntry(i,current.column,current.value - current2.value);
 					}
-					matrix[i].moveNext();
-					M.matrix[i].moveNext();	
+					matrix[i-1].moveNext();
+					M.matrix[i-1].moveNext();	
 				}
 			}
-			if(matrix[i].index() == -1){
-				sub_fill(subtraction,M.matrix[i],i);
+			if(matrix[i-1].index() == -1){
+				sub_fill(subtraction,M.matrix[i-1],i);
 			}else{
-				add_fill(subtraction,matrix[i],i);
+				add_fill(subtraction,matrix[i-1],i);
 			}
 		}
 		return subtraction;
