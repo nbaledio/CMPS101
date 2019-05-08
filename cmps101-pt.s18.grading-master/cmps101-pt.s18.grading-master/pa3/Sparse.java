@@ -19,7 +19,7 @@ public class Sparse{
 			int row = reader.nextInt();
 			int column = reader.nextInt();
 			double value = reader.nextDouble();
-			A.changeEntry(row-1,column,value);
+			A.changeEntry(row,column,value);
 		}
 		
 		//Add values to Matrix B
@@ -27,7 +27,7 @@ public class Sparse{
 			int row = reader.nextInt();
 			int column = reader.nextInt();
 			double value = reader.nextDouble();
-			B.changeEntry(row-1,column,value);
+			B.changeEntry(row,column,value);
 		}
 		
 		//Performs set Matrix operations and writes them to the outfile

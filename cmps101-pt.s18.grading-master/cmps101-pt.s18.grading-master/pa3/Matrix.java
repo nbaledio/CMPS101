@@ -81,9 +81,9 @@ public class Matrix{
 	}
 
 	void changeEntry(int i, int j, double x){ // changes ith row, jth column of this Matrix to x
-		matrix[i].moveFront();
-		for(int k = 0; k < matrix[i].length(); k++){
-			matrix_entry current = (matrix_entry) matrix[i].get();
+		matrix[i-1].moveFront();
+		for(int k = 0; k < matrix[i-1].length(); k++){
+			matrix_entry current = (matrix_entry) matrix[i-1].get();
 			if(current.column == j){
 				//System.out.println("replace");
 				current.value = x;
@@ -92,28 +92,28 @@ public class Matrix{
 				NNZ++;
 				return;
 			}
-			matrix[i].moveNext();
+			matrix[i-1].moveNext();
 		}
 		matrix_entry new_element = new matrix_entry(j,x);
-		if(matrix[i].length() == 0){
+		if(matrix[i-1].length() == 0){
 			//System.out.println("append");
-			matrix[i].append(new_element);
+			matrix[i-1].append(new_element);
 			NNZ++;
 			return;
 		}
-		matrix[i].moveFront();
-		for(int k = 0; k < matrix[i].length(); k++){
-			matrix_entry current = (matrix_entry) matrix[i].get();
+		matrix[i-1].moveFront();
+		for(int k = 0; k < matrix[i-1].length(); k++){
+			matrix_entry current = (matrix_entry) matrix[i-1].get();
 			if(j < current.column){
 				//System.out.println("insert");
-				matrix[i].insertBefore(new_element);
+				matrix[i-1].insertBefore(new_element);
 				NNZ++;
 				return;
 			}
-			matrix[i].moveNext();
+			matrix[i-1].moveNext();
 		}
 		NNZ++;
-		matrix[i].append(new_element);
+		matrix[i-1].append(new_element);
 	}
 	
 	Matrix scalarMult(double x){ 				// returns a new Matrix that is the scalar product of this Matrix with x
@@ -123,7 +123,7 @@ public class Matrix{
 			for(int j = 0; j < matrix[i].length();j++){
 				matrix_entry current = (matrix_entry)matrix[i].get();
 				if(current.value * x != 0){
-					scalar_Mult.changeEntry(i,current.column,current.value*x);
+					scalar_Mult.changeEntry(i+1,current.column,current.value*x);
 				}
 				matrix[i].moveNext();
 			}
@@ -146,14 +146,14 @@ public class Matrix{
 				matrix_entry current = (matrix_entry)matrix[i].get();
 				matrix_entry current2 = (matrix_entry)M.matrix[i].get();
 				if(current.column > current2.column){
-					addition.changeEntry(i,current2.column,current2.value);
+					addition.changeEntry(i+1,current2.column,current2.value);
 					M.matrix[i].moveNext();
 				}else if(current.column < current2.column){
-					addition.changeEntry(i,current.column,current.value);
+					addition.changeEntry(i+1,current.column,current.value);
 					matrix[i].moveNext();
 				}else if(current.column == current2.column){
 					if(current.value + current2.value != 0){
-						addition.changeEntry(i,current.column,current.value + current2.value);
+						addition.changeEntry(i+1,current.column,current.value + current2.value);
 					}
 					matrix[i].moveNext();
 					M.matrix[i].moveNext();	
@@ -190,14 +190,14 @@ public class Matrix{
 				matrix_entry current = (matrix_entry)matrix[i].get();
 				matrix_entry current2 = (matrix_entry)M.matrix[i].get();
 				if(current.column > current2.column){
-					subtraction.changeEntry(i,current2.column,-current2.value);
+					subtraction.changeEntry(i+1,current2.column,-current2.value);
 					M.matrix[i].moveNext();
 				}else if(current.column < current2.column){
-					subtraction.changeEntry(i,current.column,current.value);
+					subtraction.changeEntry(i+1,current.column,current.value);
 					matrix[i].moveNext();
 				}else if(current.column == current2.column){
 					if(current.value - current2.value != 0){
-						subtraction.changeEntry(i,current.column,current.value - current2.value);
+						subtraction.changeEntry(i+1,current.column,current.value - current2.value);
 					}
 					matrix[i].moveNext();
 					M.matrix[i].moveNext();	
@@ -227,7 +227,8 @@ public class Matrix{
 			matrix[i].moveFront();
 			for(int j = 0; j < matrix[i].length();j++){
 				matrix_entry current = (matrix_entry) matrix[i].get();
-				transposed_matrix.changeEntry(current.column-1,i+1,current.value);
+				//current.column-1
+				transposed_matrix.changeEntry(current.column,i+1,current.value);
 				matrix[i].moveNext();
 			}
 		}
@@ -241,7 +242,7 @@ public class Matrix{
 			for(int j = 0; j < size; j++){
 				double dot_product = dot(matrix[i],B.matrix[j]);
 				if(dot_product != 0){
-					multiplied.changeEntry(i,j+1,dot_product);
+					multiplied.changeEntry(i+1,j+1,dot_product);
 				}
 			}
 		}

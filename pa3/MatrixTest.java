@@ -1,6 +1,17 @@
 public class MatrixTest{
 	public static void main (String[]args){
-		Matrix test = new Matrix(4);
+		
+		Matrix A = new Matrix(3);
+        A.changeEntry(1, 1, 4);
+        A.changeEntry(1, 2, 2);
+        A.changeEntry(1, 3, 0);
+        A.changeEntry(2, 1, 2);
+        A.changeEntry(3, 1, 0);
+        A.changeEntry(2, 2, 2);
+        A.changeEntry(3, 3, 0);
+        A.makeZero();
+		
+		/*Matrix test = new Matrix(4);
 		Matrix test6 = new Matrix(4);
 		
 		test.changeEntry(0,1,1.0);
@@ -60,7 +71,7 @@ public class MatrixTest{
 		System.out.println(test.equals(test4));
 		System.out.println(test.equals(test5));
 		System.out.println(test.equals(test6));
-		
+		*/
 		
 	}
 }
