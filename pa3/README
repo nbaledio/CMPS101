@@ -1,0 +1,38 @@
+Nathan Baledio
+ID: 1574354
+CMPS101 Spring 2019
+-------------------
+
+Files:
+1. List.java
+  -Java file that contains the List ADT. It is implemented as a
+   doubly linked list and has built in functions for adding, 
+   removing, moving its cursor, and returning values. It has
+   been modified since pa1 to hold objects instead of strictly
+   ints.
+
+2. ListTest.java
+  -Provided file to help with testing List.java. Same as ListClient.java
+   from pa1.
+
+3. Matrix.java
+  -Matrix ADT. Holds an array of Lists to represent a matrix.
+   Supports functions such as adding, subtracting, multiplying,
+   copying, etc.
+   
+4. MatrixTest.java
+  -Provided file to help with testing Matrix.java. Student-written.
+   works similarly to ListTest.java.
+   
+5. Sparse.java
+  -Main file. Takes an input file of array size, and non-zero entries
+   for an nxn matrix A and B. Creates two arrays and performs set operations
+   on them using methods from Matrix.java.
+
+6. Makefile
+  -Used to create Sparse. Simply run "make" to use.
+
+7. README
+  -This file
+
+Usage: java Sparse <input file> <output file>

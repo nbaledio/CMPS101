@@ -1,3 +1,7 @@
+//Nathan Baledio
+//ID: 1574354
+//CMPS101 Spring 2019
+
 public class Matrix{
 	
 	//Fields
@@ -66,6 +70,7 @@ public class Matrix{
 		for(int i = 0; i < size; i++){
 			matrix[i].clear();
 		}
+		NNZ = 0;
 	}
 
 	Matrix copy(){				// returns a new Matrix having the same entries as this Matrix
@@ -77,6 +82,7 @@ public class Matrix{
 				matrix[i].moveNext();
 			}
 		}
+		matrix_copy.NNZ = NNZ;
 		return matrix_copy;
 	}
 
@@ -86,13 +92,20 @@ public class Matrix{
 			matrix_entry current = (matrix_entry) matrix[i-1].get();
 			if(current.column == j){
 				//System.out.println("replace");
+				if(x == 0){
+					matrix[i-1].delete();
+					NNZ--;
+					return;
+				}
 				current.value = x;
 				matrix[i-1].insertBefore(current);
 				matrix[i-1].delete();
-				NNZ++;
 				return;
 			}
 			matrix[i-1].moveNext();
+		}
+		if(x == 0){
+			return;
 		}
 		matrix_entry new_element = new matrix_entry(j,x);
 		if(matrix[i-1].length() == 0){

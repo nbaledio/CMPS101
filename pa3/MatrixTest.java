@@ -1,3 +1,7 @@
+//Nathan Baledio
+//ID: 1574354
+//CMPS101 Spring 2019
+
 public class MatrixTest{
 	public static void main (String[]args){
 		
