@@ -1,8 +1,18 @@
+//Nathan Baledio
+//ID: 1574354
+//CMPS101 Spring 2019
+
 import java.io.*;
 import java.util.Scanner;
 
 public class Sparse{
 	public static void main (String[]args) throws IOException{
+		 //Checks for arguments
+		 if(args.length != 2){
+			System.err.println("Usage: java Sparse <infile> <outfile>");
+		        System.exit(0);
+		 }
+
 		//Creates Reader/Writes for File I/O
 		Scanner reader = new Scanner(new File(args[0]));
 		PrintWriter out = new PrintWriter(new FileWriter(args[1]));

@@ -1,3 +1,7 @@
+//Nathan Baledio
+//ID: 1574354
+//CMPS101 Spring 2019
+
 public class Matrix{
 	
 	//Fields
@@ -141,8 +145,11 @@ public class Matrix{
 	}
 
 
-	Matrix add(Matrix M){						// returns a new Matrix that is the sum of this Matrix with M
+	Matrix add(Matrix M){					// returns a new Matrix that is the sum of this Matrix with M
 		Matrix addition = new Matrix(size);		// pre: getSize()==M.getSize()
+		if(getSize() != M.getSize()){
+			throw new RuntimeException("Cannot add matrices of different sizes");
+		}
 		//Checks if M and this Matrix are the same reference and multiplies by 2 if true
 		if(matrix == M.matrix){
 			addition = scalarMult(2.0);
@@ -187,7 +194,10 @@ public class Matrix{
  
 
 	Matrix sub(Matrix M){						// returns a new Matrix that is the difference of this Matrix with M
-		Matrix subtraction = new Matrix(size);	// pre: getSize()==M.getSize()
+		Matrix subtraction = new Matrix(size);			// pre: getSize()==M.getSize()
+		if(getSize() != M.getSize()){
+			 throw new RuntimeException("Cannot subtract matrices of different sizes");
+		}
 		if(matrix == M.matrix){
 			subtraction = scalarMult(0);
 			return subtraction;
@@ -244,8 +254,11 @@ public class Matrix{
 		return transposed_matrix;
 	}
 
-	Matrix mult(Matrix M){				// returns a new Matrix that is the product of this Matrix with M 
-		Matrix B = M.transpose();		// pre: getSize()==M.getSize()
+	Matrix mult(Matrix M){				// returns a new Matrix that is the product of this Matrix with M
+		if(getSize() != M.getSize()){		// pre: getSize()==M.getSize()
+			 throw new RuntimeException("Cannot multiply matrices of different sizes");
+		} 
+		Matrix B = M.transpose();		
 		Matrix multiplied = new Matrix(size);
 		for(int i = 0; i < size; i++){
 			for(int j = 0; j < size; j++){
