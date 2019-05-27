@@ -5,6 +5,10 @@
 
 #ifndef Graph_H_INCLUDE_
 #define Graph_H_INCLUDE_
+#include "List.h"
+
+/***typedef for Graph object***/
+typedef struct GraphObj* Graph;
 
 /*** Constructors-Destructors ***/
 Graph newGraph(int n);

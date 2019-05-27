@@ -34,7 +34,7 @@ int main(int argc, char* argv[]){
 
    // Build graph G 
    G = newGraph(n);
-   for(i=1; i<n; i++){
+   for(int i=1; i<n; i++){
       if( i%7!=0 ) addEdge(G, i, i+1);
       if( i<=28  ) addEdge(G, i, i+7);
    }
