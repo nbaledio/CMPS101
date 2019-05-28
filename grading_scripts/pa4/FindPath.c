@@ -13,24 +13,23 @@ int main(int argc, char* argv[]){
    FILE* out;
    in = fopen(argv[1], "r");
    out = fopen(argv[2], "w");
-   char str[3];
+   int first = 0;
+   int second = 0;
 
    //Reads number of vertices in graph and makes a graph
-   fgets(str,3,in);
-   int vertices = atoi(str);
-   Graph G = newGraph(vertices);
+   fscanf(in,"%d",&first);
+   Graph G = newGraph(first);
 
    //Reads edge pairs
-   while(fgets(str,3,in) != NULL){
-      int first = atoi(str);
-      fgets(str,3,in);
-      int second = atoi(str);
+   while(!feof(in)){
+      fscanf(in,"%d",&first);
+      fscanf(in,"%d",&second);
       if(first == 0 && second == 0){
          break;
       }
       addEdge(G,first,second);
-      //printf("%d ",first);
-      //printf("%d\n",second);   
+      printf("%d ",first);
+      printf("%d\n",second);   
    }
    
    //Prints adjacently list
@@ -39,10 +38,9 @@ int main(int argc, char* argv[]){
    List L = newList();
 
    //Reads path inputs
-   while(fgets(str,3,in) != NULL){
-      int first = atoi(str);
-      fgets(str,3,in);
-      int second = atoi(str);
+   while(!feof(in)){
+      fscanf(in,"%d",&first);
+      fscanf(in,"%d",&second);
       if(first == 0 && second == 0){
          break;
       }
