@@ -29,6 +29,9 @@ Graph newGraph(int n){
    NewGraph->recent = NIL;
    for(int i = 0; i <= n; i++){
       NewGraph->neighbors[i] = newList();
+      NewGraph->colors[i] = WHITE;
+      NewGraph->parents[i] = NIL; 
+      NewGraph->distance[i] = INF;
    }
    return NewGraph;
 }
@@ -69,16 +72,14 @@ void getPath(List L, Graph G, int u){
    if(getSource(G) == NIL){
       fprintf(stderr, "Cannot call getPath() on NIL source vertex");
    }
-   if(G->parents[u] == NIL){
-      prepend(L,u);
+   if(getSource(G) == u){
+      append(L,u);
+   }else if(G->parents[u] == NIL){
+      append(L,NIL);
    }else{
-      if(getSource(G) == u){
-         prepend(L,u);
-      }else{
-         prepend(L,u);
-         getPath(L,G,G->parents[u]);
-         //prepend(L,u);
-      }
+      //append(L,u);
+      getPath(L,G,G->parents[u]);
+      append(L,u);
    }
 }
 
