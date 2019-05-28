@@ -6,6 +6,11 @@
 #ifndef Graph_H_INCLUDE_
 #define Graph_H_INCLUDE_
 #include "List.h"
+#define INF -1
+#define NIL -2
+#define WHITE 1
+#define GRAY 2
+#define BLACK 3
 
 /***typedef for Graph object***/
 typedef struct GraphObj* Graph;

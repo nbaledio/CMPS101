@@ -28,8 +28,8 @@ int main(int argc, char* argv[]){
          break;
       }
       addEdge(G,first,second);
-      printf("%d ",first);
-      printf("%d\n",second);   
+      //printf("%d ",first);
+      //printf("%d\n",second);   
    }
    
    //Prints adjacently list

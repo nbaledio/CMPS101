@@ -63,7 +63,7 @@ int equals(List A, List B){
    }
    Node A_iter = A->front;
    Node B_iter = B->front;
-   for(int i = 0; i < A->size; i++){
+   while(A_iter != NULL && B_iter != NULL){
       if(A_iter->number != B_iter->number){
          return 0;
       }
@@ -174,7 +174,7 @@ void insertBefore(List L, int data){
 void insertAfter(List L, int data){
    if(L->cursor == L->back || L->size == 1){
       append(L,data);
-   }else{
+   }
       Node newelement = malloc(sizeof(NodeObj));
       newelement->number = data;
       newelement->next = L->cursor->next;
@@ -182,12 +182,9 @@ void insertAfter(List L, int data){
       L->cursor->next->prev = newelement;
       L->cursor->next = newelement;
       L->size++;
-   }
+      
 }
 void deleteFront(List L){
-   if(L->cursor == L->front){
-      L->cursor = NULL;
-   }
    if(L->size == 1){
       free(L->front);
       L->front = NULL;
@@ -201,9 +198,6 @@ void deleteFront(List L){
    }
 }
 void deleteBack(List L){
-   if(L->cursor == L->back){
-      L->cursor = NULL;
-   }
    if(L->size == 1){
       free(L->back);
       L->front = NULL;
