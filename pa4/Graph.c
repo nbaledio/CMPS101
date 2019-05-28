@@ -65,7 +65,22 @@ int getDist(Graph G, int u){
    return G->distance[u];
 }
 
-void getPath(List L, Graph G, int u);
+void getPath(List L, Graph G, int u){
+   if(getSource(G) == NIL){
+      fprintf(stderr, "Cannot call getPath() on NIL source vertex");
+   }
+   if(G->parents[u] == NIL){
+      prepend(L,u);
+   }else{
+      if(getSource(G) == u){
+         prepend(L,u);
+      }else{
+         prepend(L,u);
+         getPath(L,G,G->parents[u]);
+         //prepend(L,u);
+      }
+   }
+}
 
 /*** Manipulation procedures ***/
 void makeNull(Graph G){
