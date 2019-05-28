@@ -94,9 +94,6 @@ void addEdge(Graph G, int u, int v){
    int found = 0;
    moveFront(G->neighbors[u]);
    while(index(G->neighbors[u]) != -1){
-      if(v == get(G->neighbors[u])){
-         return;
-      }
       if(v < get(G->neighbors[u])){
          insertBefore(G->neighbors[u],v);
          found = 1;
@@ -127,9 +124,6 @@ void addEdge(Graph G, int u, int v){
 void addArc(Graph G, int u, int v){
    moveFront(G->neighbors[u]);
    while(index(G->neighbors[u]) != -1){
-      if(v == get(G->neighbors[u])){
-         return;
-      }
       if(v < get(G->neighbors[u])){
          insertBefore(G->neighbors[u],v);
          G->edges++;
