@@ -107,7 +107,7 @@ void addEdge(Graph G, int u, int v){
 
 void addArc(Graph G, int u, int v){
    moveFront(G->neighbors[u]);
-   while(index(G->neighbors[u]) != -1){
+   for(int i = 0; i < length(G->neighbors[u]); i++){
       if(v == get(G->neighbors[u])){
          return;
       }
@@ -121,7 +121,8 @@ void addArc(Graph G, int u, int v){
    append(G->neighbors[u],v);
    G->edges++;
 }
-
+//Copy s, and use s for order
+//CHANGE: use copy for order, s for decreasing list
 void DFS(Graph G, List s){
    for(int i = 1; i <= G->vertices; i++){
       G->colors[i] = WHITE;
@@ -130,36 +131,69 @@ void DFS(Graph G, List s){
       G->finish[i] = UNDEF;
    }
    G->time = 0;
-   for(int i = 1; i <=G->vertices; i++){
-      if(G->colors[i] == WHITE){
-         Visit(G,i);
+   List order = copyList(s);
+   clear(s);
+   moveFront(order);
+   while(index(order) != -1){
+      if(G->colors[get(order)] == WHITE){
+         Visit(G,get(order),s);
       }
+      moveNext(order);
    }
+   freeList(&order);
 }
 
-void Visit(Graph G, int u){
+void Visit(Graph G, int u,List s){
    G->time++;
    G->discover[u] = G->time;
    G->colors[u] = GRAY;
-   for(int i = 1; i <= G->vertices; i++){
-      if(G->colors[i] == WHITE){
-         G->parents[i] = u;
-         Visit(G,i);
+   moveFront(G->neighbors[u]);
+   while(index(G->neighbors[u]) != -1){
+      if(G->colors[get(G->neighbors[u])] == WHITE){
+         G->parents[get(G->neighbors[u])] = u;
+         Visit(G,get(G->neighbors[u]),s);
       }
+      moveNext(G->neighbors[u]);
    }
    G->colors[u] = BLACK;
    G->time++;
    G->finish[u] = G->time;
+   prepend(s,u); 
 }
+
 /*** Other operations ***/
-Graph transpose(Graph G);
-Graph copyGraph(Graph G);
+//USE ACTUAL LIST. COPYLIST DOES NOT WORK
+Graph transpose(Graph G){
+   Graph T = newGraph(G->vertices);
+   for(int i = 1; i <= G->vertices; i++){
+      moveFront(G->neighbors[i]);
+      for(int j = 0; j < length(G->neighbors[i]); j++){
+        addArc(T,get(G->neighbors[i]),i);
+        moveNext(G->neighbors[i]);
+      }
+   }
+   return T;
+}
+//COPYLIST WORKS HERE THOUGH
+Graph copyGraph(Graph G){
+   Graph copy = newGraph(G->vertices);
+   for(int i = 0; i <= G->vertices; i++){
+      copy->neighbors[i] = copyList(G->neighbors[i]);
+      copy->colors[i] = G->colors[i];
+      copy->parents[i] = G->parents[i];
+      copy->discover[i] = G->discover[i];
+      copy->finish[i] = G->finish[i];
+   }
+   copy->edges = G->edges;
+   copy->time = G->time;
+   return copy;
+}
 void printGraph(FILE* out, Graph G){
    for(int i = 1; i <= G->vertices; i++){
       fprintf(out,"%d: ",i);
 //printf("%d: ",i);
       moveFront(G->neighbors[i]);
-      while(index(G->neighbors[i]) != -1){
+      for(int j = 0; j < length(G->neighbors[i]); j++){
          fprintf(out, "%d",get(G->neighbors[i]));
 //printf("%d",get(G->neighbors[i]));
          moveNext(G->neighbors[i]);

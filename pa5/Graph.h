@@ -6,8 +6,8 @@
 #ifndef Graph_H_INCLUDE_
 #define Graph_H_INCLUDE_
 #include "List.h"
-#define NIL -1
-#define UNDEF -2
+#define NIL 0
+#define UNDEF -1
 
 /***typedef for Graph object***/
 typedef struct GraphObj* Graph;
@@ -27,7 +27,7 @@ int getFinish(Graph G, int u);
 void addArc(Graph G, int u, int v);
 void addEdge(Graph G, int u, int v);
 void DFS(Graph G, List s);
-void Visit(Graph G, int u);
+void Visit(Graph G, int u, List s);
 
 /*** Other operations ***/
 Graph transpose(Graph G);
