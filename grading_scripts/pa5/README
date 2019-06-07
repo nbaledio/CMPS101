@@ -1,0 +1,32 @@
+Nathan Baledio
+ID: 1574354
+CMPS101 Spring 2019
+-------------------
+
+Files:
+1. FindPath.c
+  -Takes input file of edges and gives shortest path between
+   vertice inputs if possible.
+
+2. Graph.c
+  -Graph ADT file. Can perform BFS on a graph of vertices.
+
+3. Graph.h
+  -Header file for Graph.c
+
+4. GraphTest.c
+  -Test file for Graph.c
+
+5. List.c
+  -List ADT from pa2.
+
+6. List.h
+  -Header file for List.c
+
+7. Makefile
+  -Used to create FindPath. Simply run "make" to use.
+
+8. README
+  -This file
+
+Usage: FindPath <input file> <output file>
