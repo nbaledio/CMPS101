@@ -40,13 +40,21 @@ int main(int argc, char* argv[]){
 
    //Run DFS on G and G^T
    DFS(G,S);
-   Graph T = transpose(G);
-   DFS(T,S);
+   Graph Transpose = transpose(G);
+   DFS(Transpose,S);
 
    //printGraph(out,Transpose);
    //Determine the strong components of G
    int scc = 0;
 
+   for(int i = 1; i <= getOrder(G); i++){
+      if(getParent(Transpose,i) == NIL){
+         scc++;
+      }
+   }
+
+fprintf(out,"G contains %d strongly connected components:\n",scc);
+ 
    //Print the strong components
 
    //Closes files

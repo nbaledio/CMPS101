@@ -4,12 +4,12 @@ CMPS101 Spring 2019
 -------------------
 
 Files:
-1. FindPath.c
-  -Takes input file of edges and gives shortest path between
-   vertice inputs if possible.
+1. FindComponents.c
+  -Takes input file of directed edges and performs DFS.
+   Prints adjacency list and strongly connected components
 
 2. Graph.c
-  -Graph ADT file. Can perform BFS on a graph of vertices.
+  -Graph ADT file. Can perform DFS on a graph of vertices.
 
 3. Graph.h
   -Header file for Graph.c
@@ -29,4 +29,8 @@ Files:
 8. README
   -This file
 
-Usage: FindPath <input file> <output file>
+Usage: FindComponents <input file> <output file>
+
+Notes: 
+-Time is kept as a local variable to the graph object
+-There are memory errors, but it still works
